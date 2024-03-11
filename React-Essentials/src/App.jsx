@@ -1,13 +1,21 @@
+import { useState } from "react";
 import { CORE_CONCEPTS } from "./data.js";
 import Header from "./components/Header/Header.jsx";
 import CoreConcepts from "./components/CoreConcepts.jsx";
 import TabButton from "./components/TabButton.jsx";
+import { EXAMPLES } from "./data.js";
 
 //Main App component : The root of Component tree
 function App() {
+  // Using the Hook useState()
+  const [selectedTopic, setSelectedTopic] = useState('components'); //Passing the extactly two values
+
   function handleSelect(selectedbutton) {
-    console.log(selectedbutton);
+    setSelectedTopic(selectedbutton);
+    //console.log(selectedTopic);
   }
+
+  console.log("App Component Executing");
 
   return (
     <div>
@@ -33,7 +41,7 @@ function App() {
           <menu>
             {/* Component Composition : Wraping one component or content to other component   */}
             {/* <TabButton label='Components'></TabButton> */}
-            <TabButton onSelect={() => handleSelect("Components")}>
+            <TabButton onSelect={() => handleSelect("components")}>
               Components
             </TabButton>
             <TabButton onSelect={() => handleSelect("JSX")}> JSX</TabButton>
@@ -42,7 +50,13 @@ function App() {
               States
             </TabButton>
           </menu>
-          Dynamic Content
+          <div id="tab-content">
+            <h3>{EXAMPLES[selectedTopic].title}</h3>
+            <p>{EXAMPLES[selectedTopic].description}</p>
+            <pre>
+              <code>{EXAMPLES[selectedTopic].code}</code>
+            </pre>
+          </div>
         </section>
       </main>
     </div>
