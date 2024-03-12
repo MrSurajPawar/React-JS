@@ -38,15 +38,10 @@ function App() {
           <h2>Core Concept</h2>
           <ul>
             {/* passing the data between child and parent component via Props giving custom attributes to custome Components*/}
-            <CoreConcepts
-              title={CORE_CONCEPTS[0].title}
-              description={CORE_CONCEPTS[0].description}
-              image={CORE_CONCEPTS[0].image}
-            />
-
-            <CoreConcepts {...CORE_CONCEPTS[1]} />
-            <CoreConcepts {...CORE_CONCEPTS[2]} />
-            <CoreConcepts {...CORE_CONCEPTS[3]} />
+            {/*JSX is capable of outputing array of JSX elements*/}
+            {CORE_CONCEPTS.map((conceptItems) => (
+              <CoreConcepts key={conceptItems.title} {...conceptItems} />
+            ))}
           </ul>
         </section>
         <section id="examples">
@@ -54,14 +49,32 @@ function App() {
           <menu>
             {/* Component Composition : Wraping one component or content to other component   */}
             {/* <TabButton label='Components'></TabButton> */}
-            <TabButton onSelect={() => handleSelect("components")}>
+            <TabButton
+              isSelected={selectedTopic === "components"}
+              onSelect={() => handleSelect("components")}
+            >
               Components
             </TabButton>
-            <TabButton onSelect={() => handleSelect("jsx")}> JSX</TabButton>
-            <TabButton onSelect={() => handleSelect("props")}> Props</TabButton>
-            <TabButton onSelect={() => handleSelect("state")}>States</TabButton>
+            <TabButton
+              isSelected={selectedTopic === "jsx"}
+              onSelect={() => handleSelect("jsx")}
+            >
+              JSX
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "props"}
+              onSelect={() => handleSelect("props")}
+            >
+              Props
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "state"}
+              onSelect={() => handleSelect("state")}
+            >
+              States
+            </TabButton>
           </menu>
-          {/* Rendering the topic conditionally */}
+          {/* Rendering the content conditionally */}
           {tabContent}
         </section>
       </main>

@@ -1,9 +1,12 @@
-export default function TabButton({ children, onSelect }) {
-  console.log('TabButton Component Executing');
+export default function TabButton({ children, onSelect, isSelected }) {
+  console.log("TabButton Component Executing");
   return (
     <li>
       {/* Event should pass as a value here - without parathesis */}
-      <button onClick={onSelect}> {children} </button>
+      {/* ternary expression to dynamically change the style of buttons */}
+      <button className={isSelected ? 'active' : undefined} onClick={onSelect}>
+        {children}
+      </button>
     </li>
   );
 }
