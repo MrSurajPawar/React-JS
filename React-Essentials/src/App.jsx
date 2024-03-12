@@ -8,13 +8,26 @@ import { EXAMPLES } from "./data.js";
 //Main App component : The root of Component tree
 function App() {
   // Using the Hook useState()
-  const [selectedTopic, setSelectedTopic] = useState('components'); //Passing the extactly two values
+  const [selectedTopic, setSelectedTopic] = useState(); //Passing the extactly two values
 
   function handleSelect(selectedbutton) {
     setSelectedTopic(selectedbutton);
     //console.log(selectedTopic);
   }
 
+  let tabContent = <p>Please select a topic.</p>;
+
+  if (selectedTopic) {
+    tabContent = (
+      <div id="tab-content">
+        <h3>{EXAMPLES[selectedTopic].title}</h3>
+        <p>{EXAMPLES[selectedTopic].description}</p>
+        <pre>
+          <code>{EXAMPLES[selectedTopic].code}</code>
+        </pre>
+      </div>
+    );
+  }
   console.log("App Component Executing");
 
   return (
@@ -46,17 +59,10 @@ function App() {
             </TabButton>
             <TabButton onSelect={() => handleSelect("jsx")}> JSX</TabButton>
             <TabButton onSelect={() => handleSelect("props")}> Props</TabButton>
-            <TabButton onSelect={() => handleSelect("state")}>
-              States
-            </TabButton>
+            <TabButton onSelect={() => handleSelect("state")}>States</TabButton>
           </menu>
-          <div id="tab-content">
-            <h3>{EXAMPLES[selectedTopic].title}</h3>
-            <p>{EXAMPLES[selectedTopic].description}</p>
-            <pre>
-              <code>{EXAMPLES[selectedTopic].code}</code>
-            </pre>
-          </div>
+          {/* Rendering the topic conditionally */}
+          {tabContent}
         </section>
       </main>
     </div>
