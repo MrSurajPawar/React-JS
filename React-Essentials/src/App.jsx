@@ -5,7 +5,7 @@ import CoreConcepts from "./components/CoreConcepts.jsx";
 //Main App component : The root of Component tree
 function App() {
   return (
-    //Using the Fragment component
+    //Using the Fragment component the lean & clean code
     <>
       <Header />
       <main>
